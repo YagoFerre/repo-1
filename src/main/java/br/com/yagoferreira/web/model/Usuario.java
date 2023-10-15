@@ -1,7 +1,14 @@
 package br.com.yagoferreira.web.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "usuario")
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
     private String profissao;
     private Integer idade;

@@ -28,6 +28,6 @@ public class CadastroUsuario extends HttpServlet {
 
         // Adicionar ao banco de dados.
         con.createUser(usuario);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("editar.jsp");
     }
 }

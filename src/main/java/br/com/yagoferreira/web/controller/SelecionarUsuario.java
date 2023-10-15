@@ -10,19 +10,24 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet("/listar")
-public class ListarUsuario extends HttpServlet {
+@WebServlet("/selecionar")
+public class SelecionarUsuario extends HttpServlet {
     ConnectionPostgres con = new ConnectionPostgres();
+    Usuario usuario = new Usuario();
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Usuario> usuario = con.listAllUser();
-        req.setAttribute("usuario", usuario);
-        RequestDispatcher rd = req.getRequestDispatcher("listagem.jsp");
-        con.connectionTest();
+        Integer id = Integer.parseInt(req.getParameter("id"));
+        System.out.println(id);
+        usuario.setId(id);
 
+        con.selectUser(usuario);
+        req.setAttribute("id", usuario.getId());
+        req.setAttribute("nome", usuario.getNome());
+        req.setAttribute("profissao", usuario.getProfissao());
+        req.setAttribute("idade", usuario.getIdade());
+
+        RequestDispatcher rd = req.getRequestDispatcher("editar.jsp");
         rd.forward(req, resp);
     }
 }

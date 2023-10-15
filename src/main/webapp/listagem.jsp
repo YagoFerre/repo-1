@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="br.com.yagoferreira.web.model.Usuario" %>
-<%@ page import="java.util.ArrayList" %>
-<% ArrayList<Usuario> users = (ArrayList<Usuario>) request.getAttribute("usuario"); %>
+<%@ page import="java.util.List" %>
+<% List<Usuario> users = (List<Usuario>) request.getAttribute("usuario"); %>
 <html>
 <head>
     <title>Lista de Usuários</title>
@@ -18,38 +18,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<main id="main-wrapper">
 <div class="container">
 
     <% for (int i = 0; i < users.size(); i++) {
     %>
     <div class="box">
         <div class="infoBox">
-            <p>Nome</p>
-            <p><%=users.get(i).getNome()%>
+            <strong class="label">Nome</strong>
+            <p class="user-info"><%=users.get(i).getNome()%>
             </p>
         </div>
 
         <div class="infoBox">
-            <p>Profissao</p>
-            <p><%=users.get(i).getProfissao()%>
+            <strong class="label">Profissao</strong>
+            <p class="user-info"><%=users.get(i).getProfissao()%>
             </p>
         </div>
 
         <div class="infoBox">
-            <p>Idade</p>
-            <p><%=users.get(i).getIdade()%>
+            <strong class="label">Idade</strong>
+            <p class="user-info"><%=users.get(i).getIdade()%>
             </p>
         </div>
 
-        <a href="delete?id=<%=users.get(i).getId()%>">Excluir</a>
+        <a href="delete?id=<%=users.get(i).getId()%>" class="buttonSend">Excluir</a>
+        <a href="selecionar?id=<%=users.get(i).getId()%>" class="buttonList">Editar</a>
     </div>
     <%
         }
     %>
 
-
-    <a href="index.jsp">Cadastrar</a>
+    <a href="index.jsp" class="buttonSend">Cadastrar</a>
 </div>
+</main>
 
 <script src="scripts/confirm.js"></script>
 </body>
